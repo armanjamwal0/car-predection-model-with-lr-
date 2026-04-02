@@ -3,6 +3,7 @@ from flask_cors import CORS
 import pickle
 import pandas as pd
 import numpy as np
+import os
  
 app = Flask(__name__)
 CORS(app)
@@ -40,4 +41,6 @@ def predict():
     return jsonify({'predicted_price': round(float(actual_price), 2)})
  
 if __name__ == '__main__':
-    app.run(debug=True,port=5000,host='0.0.0.0')
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+    # app.run(debug=True,port=5000,host='0.0.0.0')
